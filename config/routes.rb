@@ -9,7 +9,7 @@ FirstApp::Application.routes.draw do
   resources :microposts, :only => [:create, :destroy]
 
 
-  match '/signup',  :to => 'user#new'
+
   match '/signin', :to => 'sessions#new'#'sessions#create'
 
   match '/signout', :to => 'sessions#destroy'

@@ -3,10 +3,12 @@
     <tr>
       <td class="main">
         <h1 class="micropost">What's up?</h1>
-        <%= render 'shared/micropost_form' %>
+        <%= render 'sharder/micropost_form' %>
+        <%= render 'sharder/feed' %>
+
       </td>
       <td class="sidebar round">
-        <%= render 'shared/user_info' %>
+        <%= render 'sharder/user_info' %>
       </td>
     </tr>
   </table>
@@ -21,4 +23,13 @@
 
   <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
 <% end %>
+
+
+
+
+
+
+
+
+
 

@@ -4,12 +4,12 @@ before_filter :correct_user, :only => [:edit, :update]
 before_filter :admin_user, :only => :destroy
    def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(:assistan => params[:assistan])
+    @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.name
   end
   def index
     @title = "All users"
-    @users = User.paginate(:assistan => params[:assistan])
+    @users = User.paginate(:page => params[:page])
     end											
 
   def new

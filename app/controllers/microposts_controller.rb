@@ -2,6 +2,9 @@ class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.json
   before_filter :authenticate, :only => [:create, :destroy]
+  before_filter :authorized_user, :only => :destroy
+
+
   def index
     @microposts = Micropost.all
 
@@ -46,6 +49,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to root_path
        else
+        @feed_items = []
         render 'assistans/home'
       end
     end
@@ -65,17 +69,16 @@ class MicropostsController < ApplicationController
         format.json { render json: @micropost.errors, status: :unprocessable_entity }
       end
     end
-  end
+
 
   # DELETE /microposts/1
   # DELETE /microposts/1.json
   def destroy
-    @micropost = Micropost.find(params[:id])
     @micropost.destroy
-
-    respond_to do |format|
-      format.html { redirect_to microposts_url }
-      format.json { head :no_content }
+    redirect_back_or root_path
     end
+    private
+    @microposts = current_user.microposts.find_by_id(params[:id])
+    redirect_to root_path if @microposts.nil?
   end
 end
