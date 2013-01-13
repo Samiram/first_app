@@ -6,6 +6,7 @@
         <%= image_tag "https://www.google.co.jp/logos/2012/ada_lovelaces_197th_birthday-991005-hp.jpg" %>
         <%= @user.name %>
       </h1>
+      <%= render 'follow_form' if signed_in? %>
      
      <% unless @user.microposts.empty? %>
         <table class="microposts" summary="User microposts">

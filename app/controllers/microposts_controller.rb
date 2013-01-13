@@ -59,17 +59,10 @@ class MicropostsController < ApplicationController
   # PUT /microposts/1.json
   def update
     @micropost = Micropost.find(params[:id])
-
     respond_to do |format|
-      if @micropost.update_attributes(params[:micropost])
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @micropost.errors, status: :unprocessable_entity }
-      end
+      
     end
-
+end
 
   # DELETE /microposts/1
   # DELETE /microposts/1.json
@@ -77,8 +70,8 @@ class MicropostsController < ApplicationController
     @micropost.destroy
     redirect_back_or root_path
     end
-    private
-    @microposts = current_user.microposts.find_by_id(params[:id])
-    redirect_to root_path if @microposts.nil?
-  end
+    def authorized_user
+      @micropost = current_user.microposts.find_by_id(params[:id])
+      redirect_to root_path if @micropost.nil?
+    end
 end
