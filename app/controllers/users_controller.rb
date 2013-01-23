@@ -1,4 +1,5 @@
-class UsersController < ApplicationController				
+class UsersController < ApplicationController
+before_filter :authenticate, :except => [:show, :new, :create]				
 before_filter :authenticate, :only => [:index, :edit, :update]	
 before_filter :correct_user, :only => [:edit, :update]	
 before_filter :admin_user, :only => :destroy
@@ -45,17 +46,19 @@ end
     flash[:success] = "User destroyed."
     redirect_to users_path
   end
-  def following
-    @title = "Following"
-    @user = User.find(params[:id])
-    @users = @user.following.paginate(:page => params[:page])
-    render 'show_follow'
+  
+    def following
+    show_follow(:following)
   end
 
   def followers
-    @title = "Followers"
+    show_follow(:followers)
+  end
+
+  def show_follow(action)
+    @title = action.to_s.capitalize
     @user = User.find(params[:id])
-    @users = @user.followers.paginate(:page => params[:page])
+    @users = @user.send(action).paginate(:page => params[:page])
     render 'show_follow'
   end
    private

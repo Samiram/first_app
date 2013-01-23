@@ -3,12 +3,14 @@
   <tr>
     <td class="main">
       <h1>
-        <%= image_tag "https://www.google.co.jp/logos/2012/ada_lovelaces_197th_birthday-991005-hp.jpg" %>
+        <!%= image_tag "https://www.google.co.jp/logos/2012/ada_lovelaces_197th_birthday-991005-hp.jpg" %>
+        <!%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
       <%= render 'follow_form' if signed_in? %>
      
      <% unless @user.microposts.empty? %>
+     <%= gravatar_image_tag @user.email %>
         <table class="microposts" summary="User microposts">
           <%= render @microposts %>
         </table>
