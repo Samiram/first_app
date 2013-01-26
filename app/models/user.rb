@@ -51,15 +51,15 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
 end
 def following?(followed)
-    relationships.find_by_followed_id(followed)
-  end
+  relationships.find_by_followed_id(followed)
+end
 
-  def follow!(followed)
-    relationships.create!(:followed_id => followed.id)
-  end
-  def unfollow!(followed)
-    relationships.find_by_followed_id(followed).destroy
-  end
+def follow!(followed)
+  relationships.create!(:followed_id => followed.id)
+end
+def unfollow!(followed)
+  relationships.find_by_followed_id(followed).destroy
+end
 def feed
   Micropost.from_users_followed_by(self)
 end

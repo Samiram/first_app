@@ -7,7 +7,7 @@ class Micropost < ActiveRecord::Base
    scope  :from_users_followed_by, lambda { |user| followed_by(user) }
 
     def self.from_users_followed_by(user)
-    	following_ids = user.following_ids
+    	#following_ids = user.following_ids
     	 where(:user_id => user.following.push(user))
     end 
 
