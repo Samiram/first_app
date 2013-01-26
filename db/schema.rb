@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(:version => 20130123222955) do
     t.integer  "user_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "relationship_id"
+  
   end
 
   create_table "relationships", :force => true do |t|
